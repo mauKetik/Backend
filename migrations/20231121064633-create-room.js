@@ -28,7 +28,7 @@ module.exports = {
         onUpdate: 'cascade'
       },
       roomId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       status: {
         type: Sequelize.STRING,

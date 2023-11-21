@@ -1,8 +1,9 @@
 const express = require('express')
 const app = express()
-const Controller = require('./Controllers/controller')
-const ControllerLogin = require('./Controllers/controllerLogin')
-const {authentication} = require('./middleware/auth')
+
+const {authentication} = require('./middleware/auth');
+const authRouter = require('./router/authRouter');
+const mainRouter = require('./router/index');
 // const showError = require('./middleware/nextError')
 
 
@@ -11,12 +12,10 @@ app.use(express.json());
 
 
 
-//user
-app.post("/login", ControllerLogin.login)
-//pub
-app.post("/register", ControllerLogin.register)
 
+app.use(authRouter)
 app.use(authentication)//middleware
+app.use(mainRouter)
 
 app.post("/")
 

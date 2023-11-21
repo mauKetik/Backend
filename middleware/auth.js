@@ -1,11 +1,11 @@
 const { comparePassword } = require("../helpers/bcrypt");
-const { compareToken } = require("../helpers/jwt");
+const { verifyToken } = require("../helpers/jwt");
 const {User} = require("../models")
 
 const authentication = async(req,res,next) =>{
     try {
         const {authorization} = req.headers
-        console.log(req.headers);
+
     if (!authorization){
         throw {name : "EmptyToken"}
     }
@@ -17,14 +17,15 @@ const authentication = async(req,res,next) =>{
     if(rowToken.length < 2){
         throw {name : "EmptyToken"}
     }
-
+    // console.log(rowToken);
     const token = rowToken[1]
-    console.log(token);
-    const playload = compareToken(token)
-    console.log(playload, "<<<");
+    // console.log(token, 'token');
+    const playload = verifyToken(token)
+    // console.log(playload, "<<<");
+    
     const data = await User.findByPk(playload.id)
+    
     req.user = data
-
     next()
     } catch (error) {
         console.log(error);

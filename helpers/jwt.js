@@ -5,8 +5,8 @@ function createToken(input){
     return jwt.sign(input, process.env.SECRET)
 }
 
-function compareToken(token){
+function verifyToken(token){
     return jwt.verify(token, process.env.SECRET)
 }
 
-module.exports = {createToken, compareToken}
+module.exports = {createToken, verifyToken}
