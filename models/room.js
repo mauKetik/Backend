@@ -31,8 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     userId2: {
-      type :  DataTypes.INTEGER,
-      defaultValue : 1
+      type :  DataTypes.INTEGER
     },
     roomId: {
       type : DataTypes.STRING,

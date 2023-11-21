@@ -9,5 +9,6 @@ router.patch("/join-room/:roomId", Controller.joinRoom)
 router.get("/my-profile", Controller.myProfile)
 router.get("/rooms", Controller.getAllRoom)
 router.get("/leaderboard", Controller.leaderboard)
+router.get("/rooms/:roomId", Controller.waitingRoom)
 
 module.exports = router;
