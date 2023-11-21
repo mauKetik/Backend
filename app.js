@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-
+const cors = require('cors')
 const {authentication} = require('./middleware/auth');
 const authRouter = require('./router/authRouter');
 const mainRouter = require('./router/index');
@@ -9,7 +9,7 @@ const mainRouter = require('./router/index');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(cors())
 
 
 
