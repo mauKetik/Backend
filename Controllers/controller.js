@@ -85,6 +85,15 @@ class Controller{
             next(error)
         }
     }
+    static async leaveRoom(req,res,next){
+        try {
+            const {roomId} = req.params
+            await Room.update({userId2 : null}, {where : {roomId}})
+            res.status(200).json({ message : `Leave room succeed`})
+        } catch (error) {
+            next(error)
+        }
+    }
     static async waitingRoom(req,res,next){
         try {
             const {roomId} = req.params

@@ -11,4 +11,6 @@ router.get("/rooms", Controller.getAllRoom)
 router.get("/leaderboard", Controller.leaderboard)
 router.get("/rooms/:roomId", Controller.waitingRoom)
 
+router.patch("/leave-room/:roomId", Controller.leaveRoom)
+
 module.exports = router;

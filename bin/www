@@ -21,14 +21,13 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('userJoin', guestUser)
     })
     socket.on('createRoom', (createdRoom) => {
- 
-        console.log(createdRoom, 'masuk room');
         socket.broadcast.emit('createRoom', createdRoom)
     })
     socket.on('typingValue', (typingVal) => {
-
-        console.log(typingVal, 'masukVal');
         socket.broadcast.emit('typingValue', typingVal)
+    })
+    socket.on('userLeave', (leavedUser) => {
+        socket.broadcast.emit('userLeave', leavedUser)
     })
 
 })
