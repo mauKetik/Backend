@@ -48,6 +48,7 @@ class Controller {
   static async getAllRoom(req, res, next) {
     try {
       const data = await Room.findAll({
+        where:{status:"waiting"},
         include: [
           {
             as: "player1",
