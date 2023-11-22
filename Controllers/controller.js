@@ -5,7 +5,7 @@ class Controller{
     static async createRoom(req,res,next){
         try {
             const lastRandom = Date.now()
-            console.log(req.user.id);
+            
             let data = await Room.create({
                 userId1 : req.user.id,
                 roomId : 'R-' + lastRandom,
@@ -75,16 +75,20 @@ class Controller{
     static async destroyRoom(req,res,next){
         try {
             const {roomId} = req.params
+    
             await Room.destroy({
                 where : {
                     roomId :  roomId
                 }
             })
+          
             res.status(200).json({ message : `Room with id ${roomId} success to delete`})
         } catch (error) {
+            console.log(error);
             next(error)
         }
     }
+
     static async leaveRoom(req,res,next){
         try {
             const {roomId} = req.params
@@ -94,6 +98,7 @@ class Controller{
             next(error)
         }
     }
+
     static async waitingRoom(req,res,next){
         try {
             const {roomId} = req.params
@@ -104,11 +109,13 @@ class Controller{
                 model : User,
                 attributes : {exclude : ["email", "password"]}
             },
+
             {
                 as: "player2",
                 model: User,
                 attributes: { exclude: ["email", "password"] }
             }
+
         ]})
             res.status(200).json(data)
         } catch (error) {

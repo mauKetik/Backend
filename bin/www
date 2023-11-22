@@ -29,6 +29,9 @@ io.on('connection', (socket) => {
     socket.on('userLeave', (leavedUser) => {
         socket.broadcast.emit('userLeave', leavedUser)
     })
+    socket.on('deleteRoom', (deletedRoom) => {
+        socket.broadcast.emit('deleteRoom', deletedRoom)
+    })
 
 })
 
