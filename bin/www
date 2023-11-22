@@ -1,0 +1,46 @@
+require("dotenv").config();
+const app = require("../app");
+const PORT = process.env.PORT || 3000;
+
+const http = require("http");
+const socketIo = require("socket.io");
+
+const server = http.createServer(app);
+
+const io = socketIo(server, {
+  cors: {
+    origin: "https://mauketik.web.app",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`io connected!`);
+  socket.on("userJoin", (guestUser) => {
+    socket.join(guestUser.roomId);
+    socket.broadcast.emit("userJoin", guestUser);
+  });
+  socket.on("createRoom", (createdRoom) => {
+    socket.broadcast.emit("createRoom", createdRoom);
+  });
+  socket.on("typingValue", (typingVal) => {
+    socket.broadcast.emit("typingValue", typingVal);
+  });
+  socket.on("userLeave", (leavedUser) => {
+    socket.broadcast.emit("userLeave", leavedUser);
+  });
+  socket.on("deleteRoom", (deletedRoom) => {
+    socket.broadcast.emit("deleteRoom", deletedRoom);
+  });
+  socket.on("pressStartGame", (roomId) => {
+    io.to(roomId).emit("startFromServer", "startGame");
+  });
+  socket.on("otherScore", (data) => {
+    // socket.broadcast.to(data.roomId).emit("otherScoreUpdate", data.score);
+    // socket.to(data.roomId).emit("otherScoreUpdate", data.score);
+    socket.broadcast.emit("otherScoreUpdate", data.score);
+  });
+});
+
+server.listen(PORT, () => {
+  console.log(`Listening on ${PORT}`);
+});
