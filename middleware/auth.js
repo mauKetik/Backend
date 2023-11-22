@@ -5,7 +5,7 @@ const {User} = require("../models")
 const authentication = async(req,res,next) =>{
     try {
         const { authorization } = req.headers;
-        console.log(authorization);
+        // console.log(authorization);
         if (!authorization) {
             throw { name: "EmptyToken" };
         }
