@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "1234",
+    "username": "mauketik_user",
+    "password": "password",
     "database": "MauKetikDB",
-    "host": "127.0.0.1",
     "dialect": "postgres",
-    "logging" : false
+    "logging" : false,
+    "host" : "database"
   },
   "test": {
     "username": "root",
@@ -18,3 +18,4 @@
     "use_env_variable":"DATABASE_URL"
   }
 }
+
