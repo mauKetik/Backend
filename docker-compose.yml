@@ -9,6 +9,7 @@ services:
     ports:
       - "3000:3000"
     environment:
+      - NODE_ENV=production
       - DATABASE_URL=postgres://sjflihyq:hmtaQYOPhmRF-Ur_k3VT6mHIwXgXzMbC@salt.db.elephantsql.com/sjflihyq
       - SECRET=rahasia
 
@@ -18,7 +19,7 @@ services:
     volumes:
       - mauketikdb:/app/data  # Menambahkan volume untuk persistensi data aplikasi
 
-    command: sh -c "npx sequelize-cli db:migrate --env production  && npm start"
+    command: sh -c "npx sequelize-cli db:migrate --env production && npm start"
 
   database:
       image: postgres:16-alpine
