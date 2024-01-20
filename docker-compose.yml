@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    image: itsmauls/mauketik-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgres://sjflihyq:hmtaQYOPhmRF-Ur_k3VT6mHIwXgXzMbC@salt.db.elephantsql.com/sjflihyq
+      - SECRET=rahasia
+
+    env_file:
+      - .env
+
+    volumes:
+      - mauketikdb:/app/data  # Menambahkan volume untuk persistensi data aplikasi
+
+    command: sh -c "npx sequelize-cli db:migrate --env production && npm start"
+
+  database:
+      image: postgres:16-alpine
+      environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=MauKetikDB
+      volumes:
+        - database:/var/lib/postgresql/data
+
+volumes:
+  mauketikdb:
+  database:
+
+networks:
+  maunetwork:
+
