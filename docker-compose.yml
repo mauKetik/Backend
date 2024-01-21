@@ -19,7 +19,7 @@ services:
     volumes:
       - mauketikdb:/app/data  # Menambahkan volume untuk persistensi data aplikasi
 
-    command: sh -c "npx sequelize-cli db:migrate --env production && npm start"
+    command: sh -c "npm run db:migrate && npx sequelize-cli db:migrate --env production && npm start"
 
   database:
       image: postgres:16-alpine

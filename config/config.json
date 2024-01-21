@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "mauketik_user",
-    "password": "password",
+    "username": "postgres",
+    "password": "postgres",
     "database": "MauKetikDB",
     "dialect": "postgres",
     "logging" : false,
